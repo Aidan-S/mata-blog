@@ -1,0 +1,66 @@
+{% extends "header.html" %}
+{% block content %}
+
+<div class="row">
+    <div class="col">
+        
+
+
+        <div class="row">
+            <div class="col">
+                {# Username Update Form #}
+                <h2>Add Friend</h2>
+                <form method="POST" action="">
+                    {{ nameForm.csrf_token }}
+                    <div class="form-group">
+                      {{ nameForm.search_query }}
+
+                      {% if nameForm.search_query.errors %}
+                      <div class="alert alert-warning" role="alert">
+                          {% for error in nameForm.search_query.errors %}
+                              <span>{{ error }}</span>
+                          {% endfor %}
+                      </div>
+                      {% endif %}
+                    </div>
+                    {{ nameForm.submitN() }}
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                {# Profile Picture Update Form #}
+                <h2>Search by tag</h2>
+                <form method="POST" action="" enctype=multipart/form-data>
+                    {{ tagForm.csrf_token }}
+                    <div class="form-group">
+                      {{ tagForm.search_query }}
+              
+                      {% if tagForm.search_query.errors %}
+                      <div class="alert alert-warning" role="alert">
+                          {% for error in tagForm.search_query.errors %}
+                              <span>{{ error }}</span>
+                          {% endfor %}
+                      </div>
+                      {% endif %}
+                    </div>
+                    {{ tagForm.submitT() }}
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="col">
+        <p>{{current_user.username}}</p>
+        <p>Friends</p>
+        {% for pt in posts %}
+            <div>
+                <div></div>
+                <p>{{pt.poster.username}}</p>
+                <p>{{pt.content}}</p>  
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
